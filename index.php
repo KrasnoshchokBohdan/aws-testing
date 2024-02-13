@@ -1,5 +1,14 @@
 <?php
 
+use Monolog\Level;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 // Встановіть з'єднання з MySQL
 $mysqli = new mysqli("localhost", "root", "root", "test1");
 // Перевірте з'єднання
@@ -9,7 +18,7 @@ if ($mysqli->connect_errno) {
 }
 
 delete($mysqli);
-var_dump(add($mysqli));
+log(add($mysqli));
 show($mysqli);
 
 
@@ -18,6 +27,20 @@ sleep(10);
 
 // Закрийте з'єднання з MySQL
 $mysqli->close();
+
+
+function log($array)
+{
+    $logger = new Logger('my_logger');
+    // Створення обробника для запису в файл
+    $streamHandler = new StreamHandler(__DIR__ . '/logs/app.log');
+    // Додавання обробника до екземпляру Logger
+    $logger->pushHandler($streamHandler);
+    // Запис інформації про масив
+    $logger->info('Масив:', $array);
+
+    echo 'Успішно додав лог</br>';
+}
 
 
 
