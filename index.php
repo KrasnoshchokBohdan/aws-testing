@@ -4,6 +4,7 @@ use Monolog\Level;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
+require __DIR__ .'/vendor/autoload.php';
 
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
@@ -18,7 +19,7 @@ if ($mysqli->connect_errno) {
 }
 
 delete($mysqli);
-log(add($mysqli));
+customLog(add($mysqli));
 show($mysqli);
 
 
@@ -29,11 +30,11 @@ sleep(10);
 $mysqli->close();
 
 
-function log($array)
+function customLog($array)
 {
-    $logger = new Logger('my_logger');
+    $logger = new \Monolog\Logger('my_logger');
     // Створення обробника для запису в файл
-    $streamHandler = new StreamHandler(__DIR__ . '/logs/app.log');
+    $streamHandler = new \Monolog\Handler\StreamHandler(__DIR__ . '/logs/app.log');
     // Додавання обробника до екземпляру Logger
     $logger->pushHandler($streamHandler);
     // Запис інформації про масив
