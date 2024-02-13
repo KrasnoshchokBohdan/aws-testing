@@ -9,7 +9,7 @@ if ($mysqli->connect_errno) {
 }
 
 delete($mysqli);
-add($mysqli);
+var_dump(add($mysqli));
 show($mysqli);
 
 
@@ -31,6 +31,7 @@ function delete($mysqli)
 
 function add($mysqli)
 {
+    $result = [];
     // Додати 3 значення
     for ($i = 0; $i < 3; $i++) {
         // Сформувати рядок для запиту
@@ -52,6 +53,22 @@ function add($mysqli)
         $randomNumber16 = generateRandomNumber();
         $sql = "INSERT INTO testtable1 (name) VALUES ('$randomNumber1,$randomNumber2,$randomNumber3,$randomNumber4,$randomNumber5,$randomNumber6,$randomNumber7,$randomNumber8,$randomNumber9,$randomNumber10,$randomNumber11,$randomNumber12,$randomNumber13,$randomNumber14,$randomNumber15,$randomNumber16')";
 
+        $result[$i] = $randomNumber1.','.
+            $randomNumber2.','.
+            $randomNumber3.','.
+            $randomNumber4.','.
+            $randomNumber5.','.
+            $randomNumber6.','.
+            $randomNumber7.','.
+            $randomNumber8.','.
+            $randomNumber9.','.
+            $randomNumber10.','.
+            $randomNumber11.','.
+            $randomNumber12.','.
+            $randomNumber13.','.
+            $randomNumber14.','.
+            $randomNumber15.','.
+            $randomNumber16;
         // Виконати запит
         $mysqli->query($sql);
 
@@ -62,6 +79,7 @@ function add($mysqli)
         }
     }
     echo 'Успішно додав 3 строчки (INSERT INTO testtable1 (name) VALUES ($randomNumbers)</br>';
+    return $result;
 }
 
 
