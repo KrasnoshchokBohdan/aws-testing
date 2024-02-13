@@ -21,7 +21,7 @@ function delete($mysqli)
 {
     $sql = "DELETE FROM testtable1 LIMIT 3";
     $mysqli->query($sql);
-    echo 'Успішно видалив перші 3 строчки (DELETE FROM testtable1 LIMIT 3)';
+    echo 'Успішно видалив перші 3 строчки (DELETE FROM testtable1 LIMIT 3)</br>';
 }
 
 
@@ -56,8 +56,8 @@ function add($mysqli)
             echo "Не вдалося додати значення: " . $mysqli->error;
             break;
         }
-        echo 'Успішно додав 3 строчки (INSERT INTO testtable1 (name) VALUES ($randomNumbers)';
     }
+    echo 'Успішно додав 3 строчки (INSERT INTO testtable1 (name) VALUES ($randomNumbers)</br>';
 }
 
 
