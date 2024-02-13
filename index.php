@@ -12,6 +12,10 @@ delete($mysqli);
 add($mysqli);
 show($mysqli);
 
+
+sleep(10);
+
+
 // Закрийте з'єднання з MySQL
 $mysqli->close();
 
@@ -77,9 +81,6 @@ function show($mysqli)
         echo "Не вдалося отримати список таблиць: " . $mysqli->error;
         exit();
     }
-
-    sleep(10);
-
     // Переберіть список таблиць
     while ($table = $result->fetch_assoc()) {
         echo "<h2>" . $table['Tables_in_test1'] . "</h2>";
