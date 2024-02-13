@@ -9,11 +9,17 @@ if ($mysqli->connect_errno) {
     exit();
 }
 
+
+// SQL-запит для видалення трьох перших значень
+$sql = "DELETE FROM testtable1 LIMIT 3";
+// Виконання запиту
+$mysqli->query($sql);
+
+
 // Функція для генерації рандомного числа
 function generateRandomNumber() {
     return rand(0, 65535);
 }
-
 // Додати 3 значення
 for ($i = 0; $i < 3; $i++) {
     // Сформувати рядок для запиту
@@ -45,15 +51,18 @@ for ($i = 0; $i < 3; $i++) {
     }
 }
 
+
+
 // Отримайте список таблиць
 $sql = "SHOW TABLES";
 $result = $mysqli->query($sql);
-
 // Перевірте результат
 if (!$result) {
     echo "Не вдалося отримати список таблиць: " . $mysqli->error;
     exit();
 }
+
+sleep(10);
 
 // Переберіть список таблиць
 while ($table = $result->fetch_assoc()) {
